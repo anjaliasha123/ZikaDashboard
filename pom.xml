@@ -65,6 +65,12 @@
 			<artifactId>jackson-datatype-jts</artifactId>
 			<version>2.4</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.locationtech.jts</groupId>
+			<artifactId>jts-core</artifactId>
+			<version>1.18.2</version> <!-- Check for the latest version -->
+		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
