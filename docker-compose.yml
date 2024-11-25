@@ -1,0 +1,15 @@
+services:
+  zikadashboard:
+    image: "roadmaplearner/zikaDashboard:v1"
+    container_name: zika-dashboard-ms
+    ports:
+      - "9090:9090"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      -zika-network
+networks:
+  zika-network:
+    driver: bridge
