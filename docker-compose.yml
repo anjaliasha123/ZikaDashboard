@@ -1,15 +1,32 @@
+version: '3.8'
 services:
-  zikadashboard:
-    image: "roadmaplearner/zikaDashboard:v1"
-    container_name: zika-dashboard-ms
+  db:
+    image: postgis/postgis:latest
+    container_name: db
+    environment:
+      POSTGRES_DB: zikadashboard
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mypwd
+    ports:
+      - "5432:5432"
+    volumes:
+      - /c/Users/bajio/Desktop/Anjali/data:/tmp
+    networks:
+      - my-network
+
+  spring-app:
+    image: roadmaplearner/zikadashboard:v1
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/zikadashboard
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: mypwd
+    depends_on:
+      - db
     ports:
       - "9090:9090"
-    deploy:
-      resources:
-        limits:
-          memory: 700m
     networks:
-      -zika-network
+      - my-network
+
 networks:
-  zika-network:
+  my-network:
     driver: bridge
