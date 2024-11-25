@@ -93,6 +93,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>zika-dashoard</finalName>
 	</build>
 
 </project>
