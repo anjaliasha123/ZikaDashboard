@@ -1,5 +1,23 @@
 version: '3.8'
 services:
+#  mail-dev:
+#    container_name: mail-dev-bsn
+#    image: maildev/maildev
+#    ports:
+#      - 1080:1080
+#      - 1025:1025
+  keycloak:
+    container_name: keycloak-bsn
+    image: quay.io/keycloak/keycloak:26.0.6
+    ports:
+      - 8080:8080
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+    networks:
+      - my-network
+    command:
+      - "start-dev"
   db:
     image: postgis/postgis:latest
     container_name: db
