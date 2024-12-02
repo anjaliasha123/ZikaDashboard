@@ -1,14 +1,18 @@
 BEGIN;
 
-CREATE EXTENSION IF NOT EXISTS postgis;
-CREATE EXTENSION IF NOT EXISTS postgis_topology;
-CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
-CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder;
-CREATE EXTENSION IF NOT EXISTS unaccent;
--- COPY report() FROM '/tmp/report.csv' DELIMITER ',' CSV HEADER;
---Brazil_Zika-2016-04-02.csv
-COPY report(reported_date, location, location_type, data_field, data_field_code, time_period, time_period_type, value, unit, location_geometry) from '/tmp/Brazil_Zika-2016-04-02.csv' DELIMITER ',' CSV HEADER;
-COPY report(reported_date, location, location_type, data_field, data_field_code, time_period, time_period_type, value, unit, location_geometry) from '/tmp/Panama_Zika-2016-02-18.csv' DELIMITER ',' CSV HEADER;
-COPY report(reported_date, location, location_type, data_field, data_field_code, time_period, time_period_type, value, unit, location_geometry) from '/tmp/Haiti_Zika-2016-02-03.csv' DELIMITER ',' CSV HEADER;
---COPY report(reported_date, location, location_type, data_field, data_field_code, time_period, time_period_type, value, unit, location_geometry) from '/tmp/MINSA_ZIKA_Search-Week_08.csv' DELIMITER ',' CSV HEADER;
+--CREATE EXTENSION IF NOT EXISTS postgis;
+--CREATE EXTENSION IF NOT EXISTS postgis_topology;
+--CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
+--CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder;
+--CREATE EXTENSION IF NOT EXISTS unaccent;
+-- COPY occurrences() FROM '/tmp/report.csv' DELIMITER ',' CSV HEADER;
+-- Step 1: Create a temporary table to load the CSV
+
+-- Step 2: Load the CSV into the temporary table
+COPY occurences(id, kingdom, phylum, class, family, scientific_name, genus, country, state_province, decimal_latitude, decimal_longitude) FROM '/tmp/filtered_occurrences.csv' DELIMITER ',' CSV HEADER;
+
+
+-- Step 4: Drop the temporary table
+--DROP TABLE temp_occurrences;
+
 COMMIT;
